@@ -1,5 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import requests
 import json
+import codecs
 from bs4 import BeautifulSoup
 	
 
@@ -17,6 +21,8 @@ categoryList = dict()
 r = requests.get(baseUrl + "product").text
 soup = BeautifulSoup(r, "html.parser")
 categoryHtmlList = soup.find_all('ul', {'class': 'product'})
+
+print('Parsing data for you, please be patient and drink some tea')
 
 for categoryHtml in categoryHtmlList:
     items = categoryHtml.find_all('li')
@@ -59,8 +65,7 @@ for categoryHtml in categoryHtmlList:
 
         categoryList[name] = productList
 
-encoded_list = json.dumps(categoryList)
-with open('products.json', 'w') as file:
-    file.write(encoded_list)
+with codecs.open('products.json', 'w', encoding='utf-8') as file:
+    json.dump(categoryList, file)
 
 print('Ready!!!')
