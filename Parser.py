@@ -10,8 +10,7 @@ def parse_product(product_html):
     single_product['carbohydrate'] = product_html.find('td', {'class': 'views-field-field-carbohydrate-value'}).text.strip()
     single_product['kcal'] = product_html.find('td', {'class': 'views-field-field-kcal-value'}).text.strip()
     return single_product
-
-
+ 
 baseUrl = "http://www.calorizator.ru/"
 categoryList = dict()
 r = requests.get(baseUrl + "product").text
