@@ -1,6 +1,7 @@
 import requests
+import json
 from bs4 import BeautifulSoup
-
+	
 
 def parse_product(product_html):
     single_product = dict()
@@ -58,4 +59,8 @@ for categoryHtml in categoryHtmlList:
 
         categoryList[name] = productList
 
-print(categoryList)
+encoded_list = json.dumps(categoryList)
+with open('products.json', 'w') as file:
+    file.write(encoded_list)
+
+print('Ready!!!')
